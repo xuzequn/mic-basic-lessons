@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main()  {
+func main() {
 	var price int32 = -68
 	fmt.Println(price)
 	var price2 uint32 = 68
@@ -22,13 +22,12 @@ func main()  {
 
 	//rune 对标 char
 
-
 	//complex()
 
-	name, price, num:= "红烧肉",68,1
+	name, price, num := "红烧肉", 68, 1
 	var total = 0
 	discount := 0.7
 	total = int(float64(price) * float64(num) * discount)
-	fmt.Printf("%s总价%d\n",name,total)
+	fmt.Printf("%s总价%d\n", name, total)
 
 }

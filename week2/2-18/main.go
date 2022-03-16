@@ -1,6 +1,6 @@
 package main
 
-func main()  {
+func main() {
 	// go mod tidy
 	// go get -u 依赖包
 	// go mod init 名称

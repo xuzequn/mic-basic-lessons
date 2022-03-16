@@ -1,7 +1,6 @@
 package model
 
 type Account struct {
-	No int32
+	No   int32
 	Name string
-
 }

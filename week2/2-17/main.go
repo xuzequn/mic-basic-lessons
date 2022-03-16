@@ -5,13 +5,13 @@ import (
 	"net/http"
 )
 
-func main()  {
+func main() {
 
 	//依赖管理
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context){
+	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"msg":"ok",
+			"msg": "ok",
 		})
 	})
 	r.Run()

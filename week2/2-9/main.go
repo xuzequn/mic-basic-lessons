@@ -5,22 +5,22 @@ import (
 	"github.com/pkg/errors"
 )
 
-func funcRecover() error{
+func funcRecover() error {
 
-	defer func(){
-		if v:= recover(); v!=nil {
+	defer func() {
+		if v := recover(); v != nil {
 			fmt.Printf("Panic recover! v:%v", v)
 		}
 	}()
 	return funcCook()
 }
 
-func funcCook() error{
+func funcCook() error {
 	panic("停水了")
 	return errors.New("发生错误了")
 }
 
-func main()  {
+func main() {
 	// panic recover defer
 
 	err := funcRecover()

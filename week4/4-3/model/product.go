@@ -2,8 +2,8 @@ package model
 
 import "gorm.io/gorm"
 
-type  Product struct {
+type Product struct {
 	gorm.Model
-	Code string
+	Code  string
 	Price uint
 }

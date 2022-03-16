@@ -6,13 +6,13 @@ import (
 	"net/http"
 )
 
-func main()  {
+func main() {
 	r := gin.Default()
 	// 账户
 	accountGroup := r.Group("/account")
 	{
 		accountGroup.GET("/list", accountList)
-		accountGroup.POST("/add",addAccount)
+		accountGroup.POST("/add", addAccount)
 	}
 	// 商品
 	productGroup := r.Group("/product")
@@ -25,26 +25,26 @@ func main()  {
 }
 
 func productList(context *gin.Context) {
-	
+
 }
 
 func addAccount(context *gin.Context) {
-	
+
 }
 
 func accountList(c *gin.Context) {
 	var accountList []model.Account
 	a1 := model.Account{
-		No: 1,
+		No:   1,
 		Name: "老王",
 	}
 	accountList = append(accountList, a1)
 	a2 := model.Account{
-		No: 2,
+		No:   2,
 		Name: "老张",
 	}
 	accountList = append(accountList, a2)
-	c.JSON(http.StatusOK,gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"accountList": accountList,
 	})
 }

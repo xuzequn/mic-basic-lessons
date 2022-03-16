@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
-func GivenFood() chan string{
+func GivenFood() chan string {
 	ch := make(chan string)
-	go func(){
+	go func() {
 		ch <- "回锅肉"
 		ch <- "炭烤生蚝"
 		ch <- "担担面"
@@ -15,14 +15,15 @@ func GivenFood() chan string{
 }
 
 //发送
-func OnlyReceive(ch chan<- int){
+func OnlyReceive(ch chan<- int) {
 
 }
+
 // 读取
-func OnlyRead(ch <-chan int){
+func OnlyRead(ch <-chan int) {
 
 }
-func main()  {
+func main() {
 	//channel
 	//ch := make(chan string)
 	//ch2 := make(chan string, 6)
@@ -30,7 +31,7 @@ func main()  {
 	//<- ch2
 	//close(ch)
 
-	ch := make(chan  string)
+	ch := make(chan string)
 	ch = GivenFood()
 
 	// first type
@@ -43,12 +44,11 @@ func main()  {
 	//}
 
 	//  second type
-	for data := range(ch){
+	for data := range ch {
 		fmt.Println(data)
 	}
 
-	ch2 := make(chan<- int )
+	ch2 := make(chan<- int)
 	OnlyReceive(ch2)
-
 
 }

@@ -6,64 +6,64 @@ import (
 	"time"
 )
 
-func Cook(){
+func Cook() {
 	now := time.Now()
 	fmt.Println("开始做饭")
-	time.Sleep(3*time.Second)
+	time.Sleep(3 * time.Second)
 	fmt.Println("饭做完了")
-	expried:= time.Now().Sub(now)
+	expried := time.Now().Sub(now)
 	fmt.Println(expried)
 }
-func Buy(){
-	fmt.Println( "去买菜")
-	time.Sleep(2*time.Second)
+func Buy() {
+	fmt.Println("去买菜")
+	time.Sleep(2 * time.Second)
 	fmt.Println("买菜回来")
 }
 
-func Cook2(){
+func Cook2() {
 	fmt.Println("开始做饭")
-	time.Sleep(3*time.Second)
+	time.Sleep(3 * time.Second)
 	fmt.Println("饭做完了")
 
 }
 
-func Eat(){
+func Eat() {
 	fmt.Println("吃饭")
-	time.Sleep(1*time.Second)
+	time.Sleep(1 * time.Second)
 	fmt.Println("饭吃完了")
 }
 
-func Wash(){
+func Wash() {
 	fmt.Println("开始洗碗")
-	time.Sleep(1*time.Second)
+	time.Sleep(1 * time.Second)
 	fmt.Println("洗碗结束")
 
 }
 
 // type one
-func CustomMiddleWare(c *gin.Context){
-	now:=time.Now()
+func CustomMiddleWare(c *gin.Context) {
+	now := time.Now()
 	// 权限鉴定
 	// if 通过 { c.Next() } else { 要么返回要么报错， 这是业务相关处理 }
 	c.Next()
-	expried:=time.Now().Sub(now)
+	expried := time.Now().Sub(now)
 	fmt.Println(expried)
 
 }
 
 //  type two
 func CustomMiddleWare2() gin.HandlerFunc {
-	return func(c *gin.Context){
-		now:=time.Now()
+	return func(c *gin.Context) {
+		now := time.Now()
 		c.Next()
-		expried:=time.Now().Sub(now)
-		fmt.Printf("耗时：%v \n",expried)
+		expried := time.Now().Sub(now)
+		fmt.Printf("耗时：%v \n", expried)
 	}
 }
 
-func main()  {
+func main() {
 	//Cook()
-	r:= gin.Default()
+	r := gin.Default()
 	//r.Use(CustomMiddleWare)
 	r.Use(CustomMiddleWare2())
 	r.GET("/", func(c *gin.Context) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main()  {
+func main() {
 	// select类似 swtich case default
 	//select {
 	//case <-ch1:
@@ -49,14 +49,14 @@ func main()  {
 	//}
 
 	// case 表达式 执行 顺序 从上到下， 从左到右
-	ch4 := make(chan string,8)
-	ch5 := make(chan string,8)
+	ch4 := make(chan string, 8)
+	ch5 := make(chan string, 8)
 	var chs = []chan string{ch4, ch5}
-	var names  = []string{"欢喜","Go语言极简一本通","面向加薪学习"}
+	var names = []string{"欢喜", "Go语言极简一本通", "面向加薪学习"}
 	select {
-	case getchan(0,chs) <- getName(2,names):
+	case getchan(0, chs) <- getName(2, names):
 		fmt.Println("执行了第一条语句")
-	case getchan(1,chs) <- getName(1,names):
+	case getchan(1, chs) <- getName(1, names):
 		fmt.Println("执行了第二条语句")
 	default:
 		fmt.Println("默认")
@@ -65,15 +65,15 @@ func main()  {
 	// for select break
 
 	ch := make(chan string)
-	go func(){
+	go func() {
 		for {
 			ch <- "烤乳猪"
 		}
 	}()
 
-	for{
+	for {
 		select {
-		case data:=<-ch:
+		case data := <-ch:
 			fmt.Println(data)
 			break
 
@@ -85,20 +85,20 @@ func main()  {
 
 	}
 
-    //exit:
+	//exit:
 	//  fmt.Println("退出循环")
 
 	fmt.Println("main 结束")
 
 }
 
-func getName(i int, name []string) string{
-	fmt.Printf("name:%d\n",i)
+func getName(i int, name []string) string {
+	fmt.Printf("name:%d\n", i)
 	return name[i]
 }
 
 func getchan(i int, chs []chan string) chan string {
-	fmt.Printf("chs: %d",i)
+	fmt.Printf("chs: %d", i)
 	return chs[i]
-	
+
 }

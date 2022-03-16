@@ -13,15 +13,15 @@ import (
 
 var db *gorm.DB
 
-func init(){
+func init() {
 	var err error
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer（日志输出的目标，前缀和日志包含的内容——译者注）
 		logger.Config{
-			SlowThreshold: time.Second,   // 慢 SQL 阈值 > 1s
-			LogLevel:      logger.Info, // 日志级别
-			IgnoreRecordNotFoundError: true,   // 忽略ErrRecordNotFound（记录未找到）错误
-			Colorful:      true,         // 禁用彩色打印
+			SlowThreshold:             time.Second, // 慢 SQL 阈值 > 1s
+			LogLevel:                  logger.Info, // 日志级别
+			IgnoreRecordNotFoundError: true,        // 忽略ErrRecordNotFound（记录未找到）错误
+			Colorful:                  true,        // 禁用彩色打印
 		},
 	)
 	dsn := "root:123456@tcp(127.0.0.1:3306)/orm_test?charset=utf8mb4&parseTime=True&loc=Local"
@@ -36,7 +36,7 @@ func init(){
 
 }
 
-func main()  {
+func main() {
 	// 面向对象的查询方式
 	//u1 := model.User{}
 	// SELECT * FROM `users` WHERE name='欢喜' ORDER BY `users`.`id` LIMIT 1
@@ -66,12 +66,11 @@ func main()  {
 	// 结构作为查询参数，gorm 只查询非零值的字段条件，通过map去避免
 	var userlist2 []model.User
 	db.Where(map[string]interface{}{
-		"name":"欢喜",
-		"age": 0,
+		"name": "欢喜",
+		"age":  0,
 	}).Find(&userlist2)
-	for _,item := range userlist2{
+	for _, item := range userlist2 {
 		fmt.Println(item.ID)
 	}
-
 
 }

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func GoToHappy(sunSine bool){
+func GoToHappy(sunSine bool) {
 
 	if sunSine {
 		fmt.Println("出去嗨皮，出去浪")
@@ -21,11 +21,11 @@ func VisitUrl(url string) (int, error) {
 	if err != nil {
 		return 0, err
 	} else {
-		return res.StatusCode,nil
+		return res.StatusCode, nil
 	}
 }
 
-func SwitchShow(url string){
+func SwitchShow(url string) {
 	if code, err := VisitUrl(url); err != nil {
 		fmt.Println(err)
 	} else {
@@ -41,15 +41,15 @@ func SwitchShow(url string){
 	}
 }
 
-func SwitchShow2(url string){
+func SwitchShow2(url string) {
 	if code, err := VisitUrl(url); err != nil {
 		fmt.Println(err)
 	} else {
 		switch {
-		case code==200:
+		case code == 200:
 			fmt.Println("\n请求成功")
 			break // failthough
-		case code==404:
+		case code == 404:
 			fmt.Println("\n网址错误")
 		default:
 			panic("未知错误")
@@ -57,7 +57,7 @@ func SwitchShow2(url string){
 	}
 }
 
-func main(){
+func main() {
 	//VisitUrl("http://www.baidu.com")
 	SwitchShow("http://www.baidu.com")
 }

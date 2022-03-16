@@ -7,30 +7,28 @@ import (
 	"time"
 )
 
-
-func CustomMiddleWare(c *gin.Context){
-	now:=time.Now()
-	name,ok := c.Get("name")
+func CustomMiddleWare(c *gin.Context) {
+	now := time.Now()
+	name, ok := c.Get("name")
 	if !ok {
 		//return
 		c.Abort()
 	}
 	fmt.Println(name)
 	c.Next()
-	expried:=time.Now().Sub(now)
+	expried := time.Now().Sub(now)
 	fmt.Println(expried)
 
 }
 
-
-func main()  {
+func main() {
 	//Cook()
-	r:= gin.Default()
+	r := gin.Default()
 	//r.Use(CustomMiddleWare)
 	r.Use(CustomMiddleWare)
-	r.GET("/" , func(c *gin.Context) {
+	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"msg":"ok",
+			"msg": "ok",
 		})
 	})
 	r.Run()

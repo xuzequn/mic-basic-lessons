@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func Cook(){
+func Cook() {
 
 	// 栈， 先进后出， 在panic 之前执行， 在return 之后执行， 执行完之后 退出
 	defer fmt.Println("吃点好的开饭")
@@ -17,28 +17,28 @@ func Cook(){
 	fmt.Println("做饭")
 }
 
-func WriteMenu(fileName string, foods []string){
-	curDir,err := os.Getwd()
+func WriteMenu(fileName string, foods []string) {
+	curDir, err := os.Getwd()
 	// f 实现了 writer 接口
-	path := curDir+fileName
-	f ,err:= os.Create(path)
+	path := curDir + fileName
+	f, err := os.Create(path)
 	defer f.Close()
 	if err != nil {
 		panic(err)
 	}
 	w := bufio.NewWriter(f)
-	defer  w.Flush()
-	for _,item := range foods{
+	defer w.Flush()
+	for _, item := range foods {
 		fmt.Fprintln(w, item)
 	}
 
 }
 
-func main()  {
+func main() {
 
 	//defer
 	//Cook()
-	s:=[]string{"葱烧海参","烧鹅","炭烤生蚝","茶甜鸭","干炒牛河"}
-	WriteMenu("/week2/2-8/menu.txt",s)
-	
+	s := []string{"葱烧海参", "烧鹅", "炭烤生蚝", "茶甜鸭", "干炒牛河"}
+	WriteMenu("/week2/2-8/menu.txt", s)
+
 }

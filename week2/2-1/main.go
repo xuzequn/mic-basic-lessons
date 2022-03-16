@@ -4,11 +4,8 @@ import "fmt"
 
 // interface 契约
 
-
-func main()  {
+func main() {
 	//GoToDinner("xxx")
-
-
 
 	var w Where = LaoZhang{}
 	w.WhereDiner()
@@ -18,7 +15,7 @@ func main()  {
 
 	w = LaoWang{}
 	w.WhereDiner()
-	g =XiaoLi{}
+	g = XiaoLi{}
 	g.GoToDinner("XXX")
 
 }
@@ -32,47 +29,42 @@ type GoToHappy interface {
 }
 
 type LaoWang struct {
-
 }
 
 type LaoZhang struct {
-
 }
 
 type XiaoLi struct {
-
 }
 
 type XiaoHong struct {
-
 }
 
-func (LaoWang) WhereDiner (){
+func (LaoWang) WhereDiner() {
 	fmt.Println("周末去吃大餐吗")
 	fmt.Println("法餐？日料？火锅？烧烤？")
 }
 
-func (LaoZhang) WhereDiner (){
+func (LaoZhang) WhereDiner() {
 	fmt.Println("周末去吃大餐吗")
 	fmt.Println("找老王他们来家里做客吗？")
 }
 
-func (XiaoLi) GoToDinner(dest string){
-	fmt.Println("女朋友：吃火锅"+dest+"火锅店")
-	fmt.Println("周末，就去"+dest+"火锅店，愉快的玩耍啦")
+func (XiaoLi) GoToDinner(dest string) {
+	fmt.Println("女朋友：吃火锅" + dest + "火锅店")
+	fmt.Println("周末，就去" + dest + "火锅店，愉快的玩耍啦")
 }
 
-func (XiaoHong) GoToDinner(dest string){
-	if dest == ""{
+func (XiaoHong) GoToDinner(dest string) {
+	if dest == "" {
 		fmt.Println("好的, 来家里吃吧。")
-	} else{
-		fmt.Println("女朋友：吃火锅"+dest+"火锅店")
-		fmt.Println("去"+dest+"火锅店，愉快的玩耍啦")
+	} else {
+		fmt.Println("女朋友：吃火锅" + dest + "火锅店")
+		fmt.Println("去" + dest + "火锅店，愉快的玩耍啦")
 	}
 
 }
 
-func GoToDinner(dest string)  {
-
+func GoToDinner(dest string) {
 
 }
