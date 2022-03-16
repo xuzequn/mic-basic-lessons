@@ -1,8 +1,10 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
+	"mic-basic-lessons/week4/4-5/model"
 	"os"
 	"time"
 
@@ -36,6 +38,42 @@ func init() {
 
 }
 
+func AddProduct() {
+	p1 := model.Product{
+		Code: sql.NullString{
+			String: "Go语言极简一本通",
+			Valid:  true,
+		},
+		Price: 99,
+	}
+
+	p2 := model.Product{
+		Code: sql.NullString{
+			String: "Go语言微服务架构22讲",
+			Valid:  true,
+		},
+		Price: 99,
+	}
+
+	var productList []model.Product
+
+	productList = append(productList, p1)
+	productList = append(productList, p2)
+
+	db.Create(productList)
+}
+
 func main() {
+	// delete
+	// soft delete
+
+	var p model.Product
+	db.First(&p, 4)
+	//UPDATE `products` SET `deleted_at`='2022-03-16 23:24:01.977' WHERE `products`.`id` = 4 AND `products`.`deleted_at` IS NULL
+	db.Delete(&p)
+
+	// UPDATE `products` SET `deleted_at`='2022-03-16 23:25:48.603' WHERE price=777 AND `products`.`deleted_at` IS NULL
+	// UPDATE `products` SET `deleted_at`='2022-03-16 23:31:12.532' WHERE price=9999 AND `products`.`deleted_at` IS NULL
+	db.Where("price=?", 9999).Delete(&model.Product{})
 
 }
