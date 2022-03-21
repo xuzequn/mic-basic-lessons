@@ -1,0 +1,12 @@
+
+下载
+https://github.com/protocolbuffers/protobuf/releases
+
+官方介绍
+https://github.com/protocolbuffers/protobuf
+https://developers.google.com/protocol-buffers
+
+golang插件
+protoc-gen-go
+https://pkg.go.dev/github.com/golang/protobuf/protoc-gen-go
+go get github.com/golang/protobuf/protoc-gen-go
