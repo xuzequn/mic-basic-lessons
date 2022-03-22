@@ -4,13 +4,14 @@ option go_package= "/pb";
 
 service FoodService{
     rpc SayName(FoodStreamRequest) returns (stream FoodStreamResponse); // 服务端流模式
-    rpc PostName(stream FoodStreamRequest) returns (Food)
+    rpc PostName(stream FoodStreamRequest) returns (FoodStreamResponse); // 客户端流模式
+    rpc FullStream (stream FoodStreamRequest) returns (stream FoodStreamResponse); // 双向流模式
 }
 
 message FoodStreamRequest{
-    string Name=1;
+    string name=1;
 }
 
 message FoodStreamResponse{
-    string  Msg=1;
+    string  msg=1;
 }
