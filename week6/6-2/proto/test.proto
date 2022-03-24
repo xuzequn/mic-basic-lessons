@@ -1,0 +1,10 @@
+syntax="proto3";
+option go_package="../../../";
+//                 /.;proto
+//                 /pb
+//                 /v1/test/info;pb
+//                 /v1/test/info
+//                 ../../../
+message tesRequest{
+
+}
