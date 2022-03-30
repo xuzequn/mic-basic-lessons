@@ -1,0 +1,14 @@
+syntax="proto3";
+import "google/protobuf/empty.proto";
+// Downloads/protobuf-master/src
+
+option go_package = "./;pb";
+
+service StatusService{
+    rpc alive(google.protobuf.Empty) returns (response);
+}
+
+message response {
+
+
+}
