@@ -7,7 +7,11 @@
 package pb
 
 import (
+	context "context"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -228,8 +232,12 @@ var file_todo_proto_rawDesc = []byte{
 	0x73, 0x64, 0x61, 0x79, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x57, 0x65, 0x64, 0x6e, 0x65, 0x73,
 	0x64, 0x61, 0x79, 0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x54, 0x68, 0x75, 0x72, 0x73, 0x64, 0x61,
 	0x79, 0x10, 0x04, 0x12, 0x0a, 0x0a, 0x06, 0x46, 0x72, 0x69, 0x64, 0x61, 0x79, 0x10, 0x05, 0x12,
-	0x0c, 0x0a, 0x08, 0x53, 0x61, 0x74, 0x75, 0x72, 0x64, 0x61, 0x79, 0x10, 0x06, 0x42, 0x05, 0x5a,
-	0x03, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x0c, 0x0a, 0x08, 0x53, 0x61, 0x74, 0x75, 0x72, 0x64, 0x61, 0x79, 0x10, 0x06, 0x32, 0x34, 0x0a,
+	0x0b, 0x54, 0x6f, 0x44, 0x6f, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x25, 0x0a, 0x06,
+	0x44, 0x6f, 0x57, 0x6f, 0x72, 0x6b, 0x12, 0x0c, 0x2e, 0x54, 0x6f, 0x64, 0x6f, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x54, 0x6f, 0x64, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x42, 0x05, 0x5a, 0x03, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -257,8 +265,10 @@ var file_todo_proto_depIdxs = []int32{
 	0, // 0: TodoRequest.week:type_name -> Week
 	3, // 1: TodoRequest.bookMap:type_name -> TodoRequest.BookMapEntry
 	4, // 2: TodoRequest.doneTime:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
+	1, // 3: ToDoService.DoWork:input_type -> TodoRequest
+	2, // 4: ToDoService.DoWork:output_type -> TodoResponse
+	4, // [4:5] is the sub-list for method output_type
+	3, // [3:4] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -303,7 +313,7 @@ func file_todo_proto_init() {
 			NumEnums:      1,
 			NumMessages:   3,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_todo_proto_goTypes,
 		DependencyIndexes: file_todo_proto_depIdxs,
@@ -314,4 +324,84 @@ func file_todo_proto_init() {
 	file_todo_proto_rawDesc = nil
 	file_todo_proto_goTypes = nil
 	file_todo_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// ToDoServiceClient is the client API for ToDoService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ToDoServiceClient interface {
+	DoWork(ctx context.Context, in *TodoRequest, opts ...grpc.CallOption) (*TodoResponse, error)
+}
+
+type toDoServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewToDoServiceClient(cc grpc.ClientConnInterface) ToDoServiceClient {
+	return &toDoServiceClient{cc}
+}
+
+func (c *toDoServiceClient) DoWork(ctx context.Context, in *TodoRequest, opts ...grpc.CallOption) (*TodoResponse, error) {
+	out := new(TodoResponse)
+	err := c.cc.Invoke(ctx, "/ToDoService/DoWork", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ToDoServiceServer is the server API for ToDoService service.
+type ToDoServiceServer interface {
+	DoWork(context.Context, *TodoRequest) (*TodoResponse, error)
+}
+
+// UnimplementedToDoServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedToDoServiceServer struct {
+}
+
+func (*UnimplementedToDoServiceServer) DoWork(context.Context, *TodoRequest) (*TodoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DoWork not implemented")
+}
+
+func RegisterToDoServiceServer(s *grpc.Server, srv ToDoServiceServer) {
+	s.RegisterService(&_ToDoService_serviceDesc, srv)
+}
+
+func _ToDoService_DoWork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TodoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ToDoServiceServer).DoWork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ToDoService/DoWork",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ToDoServiceServer).DoWork(ctx, req.(*TodoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ToDoService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "ToDoService",
+	HandlerType: (*ToDoServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DoWork",
+			Handler:    _ToDoService_DoWork_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "todo.proto",
 }
