@@ -1,0 +1,4 @@
+{"level":"info","ts":1649756746.9623098,"caller":"7-2/main.go:22","msg":"error:出错了"}
+{"level":"info","ts":1649756746.962427,"caller":"7-2/main.go:23","msg":"又出错了err出错了time1649756746"}
+{"level":"info","ts":1649756801.228821,"caller":"7-2/main.go:22","msg":"error:出错了"}
+{"level":"info","ts":1649756801.228949,"caller":"7-2/main.go:23","msg":"又出错了err出错了time1649756801"}
